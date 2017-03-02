@@ -1,8 +1,8 @@
 #include<stdio.h>
-#define MAX 7
+#define MAX 7							//No. of Nodes
 int min,max,e1,e2;
 
-int BFS(int tree[MAX][MAX], int start)
+int BFS(int tree[MAX][MAX], int start)				//To check whether cycle is formed
 {
     int visited[MAX] = {0};
 	int j;
@@ -20,7 +20,7 @@ int BFS(int tree[MAX][MAX], int start)
             {
                 visited[j]=1;
                 q[++rear]=j;
-                if(j==e2)
+                if(j==e2)					//Whether Edges e1&e2 are connected(Cycle forming codition)
                     return 1;
             }
         }
@@ -30,7 +30,7 @@ int BFS(int tree[MAX][MAX], int start)
 }
 
 
-void minfunc(int a[MAX][MAX],int flag[MAX][MAX])
+void minfunc(int a[MAX][MAX],int flag[MAX][MAX])		//Finding minimum weighted edge and it's nodes
 {
 	int i,j;
 	min=max+1;
@@ -45,11 +45,11 @@ void minfunc(int a[MAX][MAX],int flag[MAX][MAX])
 			}
 		}
 	}
-	flag[e1][e2]=1;
+	flag[e1][e2]=1;						//Flag used to show whether an edge has already been used
 	flag[e2][e1]=1;
 }
 
-void addEdge(int tree[MAX][MAX])
+void addEdge(int tree[MAX][MAX])				//Adding the edge to Min Spanning Tree
 {
 	tree[e1][e2]=min;
 	tree[e2][e1]=min;
@@ -62,9 +62,9 @@ int main()
 {
 	max=0;
 	
-	int a[MAX][MAX], flag[MAX][MAX]={0}, tree[MAX][MAX]={0};
-	int nodeList[MAX]={0};
-	int i,j,nodes;
+	int a[MAX][MAX], flag[MAX][MAX]={0}, tree[MAX][MAX]={0};	
+	int nodeList[MAX]={0};					//List of nodes added in Min Spanning Tree
+	int i,j,edges;
 	int weight=0;
 	int f;
 
@@ -78,30 +78,30 @@ int main()
 			scanf("%d",&a[i][j]);
 			
 			if(a[i][j]>max)
-				max=a[i][j];
+				max=a[i][j];			//Finding Max weight to help find the minimum
 			
 		}
 	}
 
     printf("\nMinimum Spanning Tree is: ");
-	nodes=MAX-1;
-	while(nodes!=0)
+	edges=MAX-1;						//Edges in Min Spanning tree = Nodes-1
+	while(edges!=0)
 	{
-		minfunc(a,flag);
+		minfunc(a,flag);				//Find min weighted edge
 		
 					
 		if( (nodeList[e1]==1) && (nodeList[e2]==1) )
 		{	
-			while( BFS( tree, e1 ) )
+			while( BFS( tree, e1 ) )		//Loop runs till edge is found which does not form a cycle
 				minfunc(a,flag);
 		}
 		
-		addEdge(tree);
-		nodes--;
+		addEdge(tree);					//Add edge to tree
+		edges--;
 		
-		nodeList[e1]=1;
+		nodeList[e1]=1;					//Adding edges to nodeList
 		nodeList[e2]=1;
-		weight=weight+min;
+		weight=weight+min;				//Adding weights
 		
 	}
 
