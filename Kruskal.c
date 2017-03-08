@@ -10,7 +10,7 @@ int BFS(int tree[MAX][MAX], int start)				//To check whether cycle is formed
     int front=-1;
     int rear=0;
     q[0]=e1;
-    visited[j]=1;
+    visited[start]=1;
     while( front!=rear )
     {
         start=q[++front];
