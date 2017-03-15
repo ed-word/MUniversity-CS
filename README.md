@@ -2,3 +2,4 @@
 
 1. Kruskal's Min Spanning Tree
 2. Prim's Min Spanning Tree
+3. Dijkstra's Algorithm
