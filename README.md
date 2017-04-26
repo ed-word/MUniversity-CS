@@ -6,3 +6,6 @@
 4. 15 Puzzle Problem
 5. N-Queens Problem
 6. Sum of Subset Problem
+7. Bellman Ford Algorithm
+8. All Pair Shortest (Floyd Warshall)
+9. Graph Coloring
