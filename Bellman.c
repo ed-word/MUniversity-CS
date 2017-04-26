@@ -1,37 +1,44 @@
 #include<stdio.h>
-#define MAX 4	
+#define MAX 5	
 #define INF 9999
+int dist[MAX];
+parent[MAX]={0};
 
-void calc( int a[MAX][MAX], anext[MAX][MAX])
+void path(int node)            
+{
+    if(parent[node]==0)
+    {
+        printf("%c-",(char)(node+65));
+        printf("%c\n",(char)(65));
+    }
+    else
+    {
+        printf("%c-",(char)(node+65));
+        path(parent[node]);
+    }
+}
+
+void bellman( int a[MAX][MAX])
 {
 	int node = 0;
 	int i,j,k;
     
- 	for( k=0; k<MAX ; k++ )
+    	dist[node] = 0;
+ 
+ 	for( k=0; k<MAX-1 ; k++ )
 	{
 		for(i=0;i<MAX;i++)
 		{
+			node=i;
 			for(j=0;j<MAX;j++)
 			{
-				if(i==k)
-					anext[i][j]=a[i][j];
-
-				else
+				if( dist[j] > (dist[node]+a[node][j]) )
 				{
-					if( a[i][k]+a[k][j] < a[i][j] )
-						anext[i][j] = a[i][k]+a[k][j];	
-					else
-						anext[i][j] = a[i][j];
+					dist[j] = (dist[node]+a[node][j]);
+					parent[j]=node;
 				}
-				
 			}
 		}
-
-		
-		for(i=0;i<MAX;i++)
-			for(j=0;j<MAX;j++)
-				a[i][j]=anext[i][j];
-
 	}
 
 	
@@ -39,7 +46,7 @@ void calc( int a[MAX][MAX], anext[MAX][MAX])
 	{
 		printf("%c  ",(char)(i+65));
 		printf("%d\n", dist[i]);
-    }
+    	}
 
 }
 
@@ -47,7 +54,7 @@ void calc( int a[MAX][MAX], anext[MAX][MAX])
 int main()
 {
     
-    int a[MAX][MAX], anext[MAX][MAX] ;	
+    	int a[MAX][MAX], flag[MAX]={0}, edg[MAX]={0} ;	
 	int i,j;
 
 
@@ -62,9 +69,38 @@ int main()
 		}
 	}
 
+	for(i=0;i<MAX;i++)
+		dist[i]=INF;
     
 	printf("\n");
-	calc( a, anext );
+	bellman( a );
 	
+	printf("\nPath for nodes:\n");
+    	for(i=1;i<MAX;i++)
+    		path(i);
+    
 	return 0;
 }
+
+/*
+Output:
+
+Enter adjacency matrix: 
+0 10 0 5 0
+0 0 1 2 0
+0 0 0 0 4
+0 3 9 0 2
+7 0 6 0 0
+
+A  0
+B  8
+C  9
+D  5
+E  7
+
+Path for nodes:
+B-D-A
+C-B-D-A
+D-A
+E-D-A
+*/
