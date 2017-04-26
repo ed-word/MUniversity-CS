@@ -1,79 +1,51 @@
 #include<stdio.h>
 #define MAX 5	
 #define INF 9999
-int parent[MAX]={0};
+int dist[MAX];
+int min;
+int visit[MAX]={0};
 
-int minfunc(int node,int a[MAX][MAX],int edg[MAX],int flag[MAX], int dist[MAX])		
+
+void dijkstra( int a[MAX][MAX])
 {
-	int i,j;
-	int min = INF;
-	int edge;
-    
-	for(i=0;i<MAX;i++)
-	{
-		if( flag[i]==0 && edg[i]==0 && a[node][i]!=0 )
-        	{
-			edg[i] = dist[node] + a[node][i];
-            		parent[i] = node;
-        	}
-		
-        	else if( flag[i]==0 && edg[i]!=0 && a[node][i]!=0 ) 
-		{
-			if( dist[node]+a[node][i] < edg[i] )
-            		{
-                		edg[i] = dist[node]+a[node][i];
-                		parent[i] = node;
-            		}
-        	} 
-	
-    	}
-
-	for(i=0;i<MAX;i++)
-	{
-		if( edg[i] < min && edg[i]!=0 )
-		{
-			min = edg[i];
-			edge = i;
-        	}	
-	}
-	flag[edge] = 1;
-	edg[edge] = 0;
-	dist[edge] = min;
-
-	return edge;
-}
-
-void path(int node)
-{
-    if(parent[node]==0)
-    {
-        printf("%c-",(char)(node+65));
-        printf("%c\n",(char)(65));
-    }
-    else
-    {
-        printf("%c-",(char)(node+65));
-        path(parent[node]);
-    }
-}
-
-void dijkstra( int a[MAX][MAX], int edg[MAX], int flag[MAX] )
-{
-	int dist[MAX]={0};
 	int node = 0;
-	int i;
-    	dist[node] = 0;
-    	flag[node] = 1;
-	for( i=0; i<MAX-1 ; i++ )
+	int i,j;
+    
+    dist[node] = 0;
+ 
+  
+  	for( i=0; i<MAX ; i++ )
 	{
-		node = minfunc( node, a, edg, flag, dist);
+		visit[node]=1;
+		
+		for(j=0;j<MAX;j++)
+		{
+			if( a[node][j]!=INF )
+			{
+				if( (dist[node]+a[node][j]) < dist[j] )
+				{
+					dist[j] = dist[node]+a[node][j];
+				}
+			}
+		}
+
+		min=INF;
+		for(j=0;j<MAX;j++)
+		{
+			if( visit[j]!=1 && dist[j]<min)
+			{
+				min=dist[j];
+				node=j;
+			}
+		}
 	}
 
+	
 	for(i=0;i<MAX;i++)
 	{
 		printf("%c  ",(char)(i+65));
 		printf("%d\n", dist[i]);
-    	}
+    }
 
 }
 
@@ -81,7 +53,7 @@ void dijkstra( int a[MAX][MAX], int edg[MAX], int flag[MAX] )
 int main()
 {
     
-    	int a[MAX][MAX], flag[MAX]={0}, edg[MAX]={0} ;	
+    int a[MAX][MAX], flag[MAX]={0}, edg[MAX]={0} ;	
 	int i,j;
 
 
@@ -90,19 +62,18 @@ int main()
 	{
 		for(j=0;j<MAX;j++)
 		{
-			scanf("%d",&a[i][j]);			
+			scanf("%d",&a[i][j]);
+			if(a[i][j]==0)
+				a[i][j]=INF;
 		}
 	}
 
-	printf("\n");
-	dijkstra( a, edg, flag );
-	
-    	printf("\nPath for nodes:\n");
-    	for(i=1;i<MAX;i++)
-    	{
-        	path(i);
-    	}
+	for(i=0;i<MAX;i++)
+		dist[i]=INF;
     
+	printf("\n");
+	dijkstra( a );
+	
 	return 0;
 }
 
