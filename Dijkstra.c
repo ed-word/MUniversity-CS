@@ -93,9 +93,4 @@ C  9
 D  5
 E  7
 
-Path for nodes:
-B-D-A
-C-B-D-A
-D-A
-E-D-A
 */
