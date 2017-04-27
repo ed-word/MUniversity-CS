@@ -11,7 +11,7 @@ void dijkstra( int a[MAX][MAX])
 	int node = 0;
 	int i,j;
     
-    dist[node] = 0;
+    	dist[node] = 0;
  
   
   	for( i=0; i<MAX ; i++ )
@@ -53,7 +53,7 @@ void dijkstra( int a[MAX][MAX])
 int main()
 {
     
-    int a[MAX][MAX], flag[MAX]={0}, edg[MAX]={0} ;	
+    	int a[MAX][MAX];
 	int i,j;
 
 
