@@ -9,3 +9,4 @@
 7. Bellman Ford Algorithm
 8. All Pair Shortest (Floyd Warshall)
 9. Graph Coloring
+10. Multistage Graph
