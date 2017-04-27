@@ -1,5 +1,4 @@
 #include <stdio.h>
-#include <math.h>
 
 int n;
 int Colors;
