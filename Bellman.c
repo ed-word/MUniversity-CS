@@ -54,10 +54,9 @@ void bellman( int a[MAX][MAX])
 int main()
 {
     
-    	int a[MAX][MAX], flag[MAX]={0}, edg[MAX]={0} ;	
+    	int a[MAX][MAX];
 	int i,j;
-
-
+	
 	printf("Enter adjacency matrix: \n");
 	for(i=0;i<MAX;i++)
 	{
