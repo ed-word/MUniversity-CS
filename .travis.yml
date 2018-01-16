@@ -1,12 +1,14 @@
-language: python
 matrix:
 
   - language: python
 
     python: 
       - "3.5"
-   
+    
+    script: python
+       
   - language: node_js
     
     node_js:
       - "8.0"
+ 
