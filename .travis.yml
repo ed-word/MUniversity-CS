@@ -1,0 +1,12 @@
+language: python
+matrix:
+
+  - language: python
+
+    python: 
+      - "3.5"
+   
+  - language: node_js
+    
+    node_js:
+      - "8.0"
