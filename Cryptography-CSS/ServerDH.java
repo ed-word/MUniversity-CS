@@ -1,21 +1,17 @@
-import java.net.*; 
-import java.io.*; 
+import java.net.*;
+import java.io.*;
+
   
 public class ServerDH { 
-    //initialize socket and input stream 
     private Socket          socket   = null; 
     private ServerSocket    server   = null; 
     private DataInputStream inputSys =  null;
     private DataInputStream inputSoc =  null;
     private DataOutputStream out     = null;
   
-    // constructor with port 
-    public ServerDH(int port) 
-    {
+    public ServerDH(int port) {
     	int g = 3, n = 7, x, y = 6, a=2, b, k1, k2;
-        // starts server and waits for a connection 
-        try
-        { 
+        try { 
             server = new ServerSocket(port); 
             System.out.println("Server started"); 
   
@@ -28,62 +24,46 @@ public class ServerDH {
             inputSoc = new DataInputStream( 
                 new BufferedInputStream(socket.getInputStream())); 
   
-            // sends output to the socket 
             out    = new DataOutputStream(socket.getOutputStream());
   
             String line = ""; 
   				
-            // reads message from client until "Over" is sent  
-            try
-            { 
-                g = Integer.parseInt(inputSoc.readUTF());
-                n = Integer.parseInt(inputSoc.readUTF()); 
-                System.out.println("g: "+ g);
-                System.out.println("n: " + n);
-            } 
-            catch(IOException i) 
-            { 
-                System.out.println(i); 
-            } 
-
-
-            b = (int)Math.pow(g,y) % n;
-            System.out.println("b: " + b);
             try { 
-            out.writeUTF(Integer.toString(b));
-        } catch(IOException i) { 
-            System.out.println(i); 
-        }
-
-
-        try
-            { 
-                a = Integer.parseInt(inputSoc.readUTF());
-                System.out.println("a: " + a);
-            } 
-            catch(IOException i) 
-            { 
+                g = Integer.parseInt(inputSoc.readUTF());
+                n = Integer.parseInt(inputSoc.readUTF());
+            } catch(IOException i) { 
                 System.out.println(i); 
             }
-        	
-        k2 = (int)Math.pow(a, y) % n;
-        System.out.println("k2: " + k2);
+            System.out.println("Received (g, n): " + g + ", " + n);
 
-            System.out.println("Closing connection"); 
+            b = (int)Math.pow(g,y) % n;
+            System.out.println("Sending b: " + b);
+            try { 
+                out.writeUTF(Integer.toString(b));
+            } catch(IOException i) { 
+                System.out.println(i); 
+            }
+
+            try {
+                a = Integer.parseInt(inputSoc.readUTF());
+            } catch(IOException i) { 
+                System.out.println(i); 
+            }
+            System.out.println("Received a: " + a);
+        	
+            k2 = (int)Math.pow(a, y) % n;
+            System.out.println("k2: " + k2);
   
-            // close connection 
             socket.close(); 
             inputSys.close();
             inputSoc.close(); 
         } 
-        catch(IOException i) 
-        { 
+        catch(IOException i) { 
             System.out.println(i); 
         } 
     } 
   
-    public static void main(String args[]) 
-    { 
+    public static void main(String args[]) { 
         ServerDH server = new ServerDH(5000); 
     } 
 }
