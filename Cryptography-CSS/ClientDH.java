@@ -3,10 +3,10 @@ import java.net.*;
 
 
 public class ClientDH { 
-    private Socket socket            = null; 
-    private DataInputStream  inputSys   = null;
-    private DataInputStream  inputSoc   = null; 
-    private DataOutputStream out     = null; 
+    private Socket socket = null; 
+    private DataInputStream inputSys = null;
+    private DataInputStream inputSoc = null; 
+    private DataOutputStream out = null; 
   
     public ClientDH(String address, int port) {
         int g = 3, n = 7, x = 4, y, a, b=2, k1, k2;

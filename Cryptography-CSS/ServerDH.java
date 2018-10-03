@@ -3,11 +3,11 @@ import java.io.*;
 
   
 public class ServerDH { 
-    private Socket          socket   = null; 
-    private ServerSocket    server   = null; 
-    private DataInputStream inputSys =  null;
-    private DataInputStream inputSoc =  null;
-    private DataOutputStream out     = null;
+    private Socket socket = null; 
+    private ServerSocket server = null; 
+    private DataInputStream inputSys = null;
+    private DataInputStream inputSoc = null;
+    private DataOutputStream out = null;
   
     public ServerDH(int port) {
     	int g = 3, n = 7, x, y = 6, a=2, b, k1, k2;
