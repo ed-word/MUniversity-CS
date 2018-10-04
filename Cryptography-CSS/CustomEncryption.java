@@ -1,3 +1,21 @@
+/*
+Enter plaintext: You want to know how two chemicals interact, do you ask them? No, they're going to lie through their lying little chemical teeth. Throw them in a beaker and apply heat.
+Encrypting
+Message Digest: L+bcJy0yv2wDT1iYsK9VmLmzVHLDOMW+juQlgLAigBA=
+length: 214
+Cipher text: =:~ôh½¶¹Ýª4½Rµ,o\^å·¥Õ¾ÿQ>I°ÜPôç½·éSÉàCËá½ï÷³)"3}H&6ß¬¾o®<ÁEDaÜÄ$X½OLì´M¸ÏXÐÀ!%ÖãØ{R¹aK?Îß7kÆ®¤
+ÞcWÊ*ßOø¤o²µÒèáýÖH&    b4ØT"¥1µkë¹zC"g¥ªtYrãNAÊ­íC9S}çªäo¯m¢ç6Z¦óú±)g/D
+vþ=^
+
+Decrypting
+length: 214
+Message Digest: L+bcJy0yv2wDT1iYsK9VmLmzVHLDOMW+juQlgLAigBA=
+Hash of message: L+bcJy0yv2wDT1iYsK9VmLmzVHLDOMW+juQlgLAigBA=
+Is Message Digest equal to Hash? true
+Plain text: You want to know how two chemicals interact, do you ask them? No, they're going to lie through their lying little chemical teeth. Throw them in a beaker and apply heat.
+*/
+
+
 import java.util.*;
 import java.io.*;
 import java.security.MessageDigest;
